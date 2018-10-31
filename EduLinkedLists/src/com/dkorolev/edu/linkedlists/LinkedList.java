@@ -43,6 +43,27 @@ public class LinkedList {
 		if (tail == node) {
 		    tail = prevNode;
 		}
+		return;
+	    } 
+	    prevNode = node;
+	    node = node.next;
+	}
+    }
+    
+    public void removeAll(int val) {
+	Node prevNode = null;
+	Node node = head;
+	while (node != null) {
+	    if (node.value == val) {
+		if (prevNode != null) {
+		    prevNode.next = node.next;
+		}
+		if (head == node) {
+		    head = node.next;
+		}
+		if (tail == node) {
+		    tail = prevNode;
+		}
 
 	    } else {
 		prevNode = node;
