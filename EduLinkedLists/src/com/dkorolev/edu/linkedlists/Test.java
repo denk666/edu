@@ -25,9 +25,19 @@ public class Test {
 	    LinkedList list = new LinkedList();
 
 	    for (int i = 0; i < 10; i++) {
+		if (list.find(i) != null) {
+		    return false;
+		}
+	    }
+	    for (int i = 0; i < 10; i++) {
 		list.addInTail(new Node(i));
 	    }
-	    return "[0;1;2;3;4;5;6;7;8;9]".equals(list.toString());
+	    for (int i = 0; i < 10; i++) {
+		if (list.find(i) == null) {
+		    return false;
+		}
+	    }
+	    return true;
 	}
     }
 
@@ -38,8 +48,20 @@ public class Test {
 	    for (int i = 0; i < 10; i++) {
 		list.addInTail(new Node(i));
 	    }
-	    list.remove(5);
-	    return "[0;1;2;3;4;6;7;8;9]".equals(list.toString());
+	    int checkInt = 5;
+	    if (list.find(checkInt) == null) {
+		return false;
+	    }
+	    list.remove(checkInt);
+	    if (list.find(checkInt) != null) {
+		return false;
+	    }
+	    for (int i : new Integer[] { 0, 1, 2, 3, 4, 6, 7, 8, 9 }) {
+		if (list.find(i) == null) {
+		    return false;
+		}
+	    }
+	    return true;
 	}
     }
 
@@ -50,9 +72,22 @@ public class Test {
 	    for (int i = 0; i < 10; i++) {
 		list.addInTail(new Node(i));
 	    }
-	    list.remove(0);
-	    list.remove(9);
-	    return "[1;2;3;4;5;6;7;8]".equals(list.toString());
+	    int start = 0;
+	    int end = 9;
+	    if (list.find(start) == null || list.find(end) == null) {
+		return false;
+	    }
+	    list.remove(start);
+	    list.remove(end);
+	    if (list.find(start) != null || list.find(end) != null) {
+		return false;
+	    }
+	    for (int i : new Integer[] { 1, 2, 3, 4, 5, 6, 7, 8 }) {
+		if (list.find(i) == null) {
+		    return false;
+		}
+	    }
+	    return true;
 	}
     }
 
@@ -63,11 +98,24 @@ public class Test {
 	    for (int i = 0; i < 10; i++) {
 		list.addInTail(new Node(i));
 	    }
+	    for (int i = 0; i < 10; i++) {
+		if (list.find(i) == null) {
+		    return false;
+		}
+	    }
 	    list.remove(0);
 	    list.remove(9);
 	    list.remove(1);
 	    list.remove(8);
-	    return "[2;3;4;5;6;7]".equals(list.toString());
+	    if (list.find(0) != null || list.find(1) != null || list.find(8) != null || list.find(9) != null) {
+		return false;
+	    }
+	    for (int i : new Integer[] { 2, 3, 4, 5, 6, 7 }) {
+		if (list.find(i) == null) {
+		    return false;
+		}
+	    }
+	    return true;
 	}
     }
 
@@ -78,15 +126,38 @@ public class Test {
 	    for (int i = 0; i < 10; i++) {
 		list.addInTail(new Node(i));
 	    }
+	    for (int i = 0; i < 10; i++) {
+		if (list.find(i) == null) {
+		    return false;
+		}
+	    }
 	    list.remove(0);
 	    list.remove(9);
 	    list.remove(1);
 	    list.remove(8);
+	    if (list.find(0) != null || list.find(1) != null || list.find(8) != null || list.find(9) != null) {
+		return false;
+	    }
+	    for (int i : new Integer[] { 2, 3, 4, 5, 6, 7 }) {
+		if (list.find(i) == null) {
+		    return false;
+		}
+	    }
 	    for (int i = 0; i < 10; i++) {
 		list.addInTail(new Node(i));
 	    }
+	    for (int i : new Integer[] { 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }) {
+		if (list.find(i) == null) {
+		    return false;
+		}
+	    }
 	    list.remove(2);
-	    return "[3;4;5;6;7;0;1;2;3;4;5;6;7;8;9]".equals(list.toString());
+	    for (int i : new Integer[] { 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }) {
+		if (list.find(i) == null) {
+		    return false;
+		}
+	    }
+	    return true;
 	}
     }
 }
