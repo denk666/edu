@@ -7,24 +7,19 @@ import java.io.Reader;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.dkorolev.edu.springtest01.service.QuestionService;
+import com.dkorolev.edu.springtest01.util.Utils;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
-
-	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring-context.xml");
-	// PersonService personService = context.getBean(PersonService.class);
-	//
-	// Person ivan = personService.getByName("Ivan");
-	// System.out.println("name: " + ivan.getName() + " age: " + ivan.getAge());
-	// context.close();
-
-	String sourcePath = "src/main/resources/test.csv";
-	QuestionService questionService = context.getBean(QuestionService.class);
-
 	Reader in = null;
+	ClassPathXmlApplicationContext context = null;
 	try {
-	    in = new FileReader(sourcePath);
+	    context = new ClassPathXmlApplicationContext("spring-context.xml");
+
+	    QuestionService questionService = context.getBean(QuestionService.class);
+
+	    in = new FileReader(Utils.defineDataLocation());
 	    questionService.run(in);
 
 	} catch (IOException e) {
@@ -34,7 +29,10 @@ public class Main {
 		if (in != null) {
 		    in.close();
 		}
-	    } catch (IOException e) {
+		if (context != null) {
+		    context.close();
+		}
+	    } catch (Exception e) {
 		e.printStackTrace();
 	    }
 	}
