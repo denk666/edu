@@ -1,8 +1,10 @@
 package com.dkorolev.edu.springtest01;
 
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -19,7 +21,7 @@ public class Main {
 
 	    QuestionService questionService = context.getBean(QuestionService.class);
 
-	    in = new FileReader(Utils.defineDataLocation());
+	    in = new InputStreamReader(new FileInputStream(Utils.defineDataLocation()), StandardCharsets.UTF_8);
 	    questionService.run(in);
 
 	} catch (IOException e) {
