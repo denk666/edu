@@ -23,7 +23,6 @@ public class Main {
 
 	    in = new InputStreamReader(new FileInputStream(Utils.defineDataLocation()), StandardCharsets.UTF_8);
 	    questionService.run(in);
-
 	} catch (IOException e) {
 	    e.printStackTrace();
 	} finally {

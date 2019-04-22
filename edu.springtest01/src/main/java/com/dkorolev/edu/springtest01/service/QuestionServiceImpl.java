@@ -20,9 +20,6 @@ public class QuestionServiceImpl implements QuestionService {
     public void run(Reader in) throws IOException {
 	List<Question> questionList = questionDao.read(in, 6);
 	
-
-//	System.out.println(questionList);
-	
 	BufferedReader console
 	    = new BufferedReader(new InputStreamReader(System.in));
 	System.out.println("press ENTER to start quiz");
